@@ -1,7 +1,7 @@
 Simple-Rain-Calculator
 ======================
 
-A Simple Rain Water Harvesting Calculator
+A Simple Rain Water Harvesting Calculator to calculate the potential capacity of rain harvestable from a surface given its dimensions.
 
 ##Quick Install
 
