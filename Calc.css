@@ -1,0 +1,37 @@
+@CHARSET "ISO-8859-1";
+/* Copyright Excellent InGenuity LLC 2011, All rights reserved, liscensed under BSD 3-clause liscense */
+
+
+h1#title {
+	color:Black;
+	font-size:18px;
+	padding-left:10px;
+
+}
+h2#subtitle {
+	color:black;
+	font-size:16px;
+	padding-left:10px;
+
+	}
+p#amount {
+	color:black;
+	font-size:20px;
+	font-weight:bold;
+	
+	}
+form#rain {
+	border-width:thin;
+	border-color:gray;
+	border-style:solid;
+	padding:25px;
+	font-size:14px;
+	}
+
+
+
+
+
+#togglesource {
+	display:none;
+}

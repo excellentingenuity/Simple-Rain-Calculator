@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<!--Copyright Excellent InGenuity LLC 2011, All rights reserved, liscensed under BSD 3-clause liscense -->
+<link rel="stylesheet" type="text/css" href="../css/Calc.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1 id="title">Rain Harvest Potential Calculator </h1>
+<h2 id="subtitle">How Much Can you Harvest?</h2>
+<p id="amount"></p>
+<form name="rain" id="rain">
+Enter the total square footage of your building or the length and width. Then enter the rainfall in inches and click the button to calculate your potential rain harvest.
+<p id="sqft_container">
+<input type="radio" name="measure" value="sqft" onclick="togglesq()"/> Calculate by Square Footage of Building <br />
+<input type="radio" name="measure" value="lw" onclick="togglelw()" /> Calculate by Lenght and Width of Building <br />
+<p id="sqfttxt">Enter Building Square Feet:  <input type="text" size="10" name="sqft" id="sqftbox" /></p>
+<p id="lengthtxt">Enter Building Length in Feet:  <input type="text" size="10" name="length" id="lengthbox" /></p>
+<p id="widthtxt">Enter Building Width in  Feet:   <input type="text" size="10" name="width" id="widthbox" /></p>
+</p>
+<p id="inches_container">
+<input type="radio" name="source" value="inches" onclick="togglein()" id="togglesource"/><p id="togglesource">  Calculate inches of Rain</p><br />
+<input type="radio" name="source" value="zipcode" onclick="togglezip()" id="togglesource" /><p id="togglesource"> Calculate by entering your Zipcode</p><br />
+<p id="rainsource"><p id="raintext">Enter Rainfall in Inches:  <input type="text" size="5" name="rainbox" id="rainbox" /></p> </p>
+</p>
+
+
+<button type="button" onclick="calculate();">Calculate Rain Harvest Potential</button>
+	
+
+</form>
+
+<script type="text/javascript">
+var sqftbox = document.getElementById('sqftbox');
+var sqfttext = document.getElementById('sqfttxt');
+var lbox = document.getElementById('lengthbox');
+var lengthtext = document.getElementById('lengthtxt');
+var wbox = document.getElementById('widthbox');
+var widthtext = document.getElementById('widthtxt');
+var rainbox = document.getElementById('rainbox');
+var raintext = document.getElementById('raintext');
+var amount = document.getElementById('amount');
+var sourcetoggle = "";
+var measuretoggle = "";
+var valid = false;
+var sqft = "";
+var base = "";
+sqfttext.style.display = 'none';
+sqftbox.style.display = 'none';
+lengthtext.style.display = 'none';
+lbox.style.display = 'none';
+widthtext.style.display = 'none';
+wbox.style.display = 'none';
+
+
+
+
+
+
+function calculate(){
+	validate();
+	if(valid == true){
+		if(measuretoggle == 'sqft'){
+			sqft = sqftbox.value;
+		}else if(measuretoggle == 'lw'){
+			sqft = lbox.value * wbox.value;	
+		}
+		base = sqft * 0.625;
+		gallons = base * rainbox.value;
+		
+		amount.innerHTML = "You can harvest: " + gallons + " gallons";
+		
+		
+	}
+	
+	
+}
+function validate(){
+
+	if(measuretoggle == 'sqft'){
+		validatesqft();
+	}else if(measuretoggle == 'lw'){
+		validatelw();
+	}
+	validatesource();
+	
+	
+}
+function validatesqft(){
+	var sqft = document.rain.sqft.value;
+	if (sqft == "" || sqft == null){
+		valid = false;
+		alert("Error: Square Feet must be a number!")
+		
+		}else if(isNaN(sqft) == true){
+			alert("Error: Square Feet must be a number!")
+			valid = false;
+			}else {
+				valid = true;
+	}
+}
+ function validatelw(){
+	var length = document.rain.length.value;
+	var width = document.rain.width.value;
+	if ((length == "" || length == null ) || (width == "" || width == null)){
+		valid = false;
+		alert("Error: Building Length and Width must be a number!")
+	}else if(isNaN(length) == true || isNaN(width) == true){
+		alert("Error: Building Length and Width must be a number!")
+		valid = false;
+	} else {
+		valid = true;
+	}
+} 
+function validatesource(){
+	var mysource = document.rain.rainbox.value;
+	if (mysource == "" || mysource == null || mysource ==  0 || isNaN(mysource) == true){
+		alert("Error: Rainfall must be in inches or supply your Zipcode")
+		valid =  false;
+	}else {
+		valid = true;
+	}
+}
+function togglesq(){
+	lengthtext.style.display = 'none';
+	lbox.style.display = 'none';
+	widthtext.style.display = 'none';
+	wbox.style.display = 'none';
+	sqfttext.style.display = 'inline';
+	sqftbox.style.display = 'inline';
+	measuretoggle = 'sqft';
+}
+function togglelw(){
+	sqfttext.style.display = 'none';
+	sqftbox.style.display = 'none';
+	lengthtext.style.display = 'inline';
+	widthtext.style.display = 'inline';
+	lbox.style.display = 'inline';
+	wbox.style.display = 'inline';
+
+	measuretoggle = 'lw';
+}
+function togglein(){
+	raintext.innerHTML = "Enter Rainfall in Inches: ";
+	sourcetoggle = 'inches';
+}
+function togglezip(){
+	raintext.innerHTML = "Enter Zipcode to determine Rainfall Amount: ";
+	sourcetoggle ='zipcode';
+}
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
